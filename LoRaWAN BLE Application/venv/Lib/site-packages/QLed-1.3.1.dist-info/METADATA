@@ -1,0 +1,26 @@
+Metadata-Version: 2.0
+Name: QLed
+Version: 1.3.1
+Summary: An LED Widget for the PyQt4/5 Framework
+Home-page: https://github.com/jazzycamel/QLed
+Author: Rob Kent
+Author-email: rob@gulon.co.uk
+License: MIT
+Description-Content-Type: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: MIT License
+Requires-Dist: six
+
+UNKNOWN
+
+
