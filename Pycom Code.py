@@ -15,20 +15,19 @@ from network import Bluetooth
 from network import WLAN
 ################################################################################
 
-lora = LoRa(mode=LoRa.LORAWAN)
+lora = LoRa(mode=LoRa.LORAWAN,region=LoRa.AS923, device_class=LoRa.CLASS_C, adr=False)
 
 # create an OTA authentication params
-dev_eui = ubinascii.unhexlify('007DD231238580F0') 
-app_eui = ubinascii.unhexlify('70B3D57ED0018276') 
+dev_eui = ubinascii.unhexlify('007DD231238580F0')
+app_eui = ubinascii.unhexlify('70B3D57ED0018276')
 app_key = ubinascii.unhexlify('D4FF29049A27405AC5D01B750D299B9E')
 
-# set the 3 default channels to the same frequency 
-lora.add_channel(0, frequency=868100000, dr_min=0, dr_max=5)
-lora.add_channel(1, frequency=868100000, dr_min=0, dr_max=5)
-lora.add_channel(2, frequency=868100000, dr_min=0, dr_max=5)
-
+# set the 3 default channels to the same frequency
+lora.add_channel(0, frequency=923200000, dr_min=0, dr_max=6)
+lora.add_channel(1, frequency=923400000, dr_min=0, dr_max=6)
+lora.add_channel(2, frequency=923400000, dr_min=0, dr_max=6)
 # join a network using OTAA
-lora.join(activation=LoRa.OTAA, auth=(dev_eui, app_eui, app_key), timeout=0)
+lora.join(activation=LoRa.OTAA, auth=(dev_eui, app_eui, app_key), timeout=0, dr=2)
 
 # wait until the module has joined the network
 while not lora.has_joined():
@@ -36,7 +35,7 @@ while not lora.has_joined():
     print('Not joined yet...')
 
 # remove all the non-default channels
-for i in range(3, 16):
+for i in range(0, 8):
     lora.remove_channel(i)
 
 # create a LoRa socket
@@ -66,6 +65,8 @@ while True:
     #Retrieves mac adresses in the allocated time
     while bluetooth.isscanning():
         adv = bluetooth.get_adv()
+
+        #CHANGE KONTAKT TO THE ADV NAME OF THE BLE TAGS YOU ARE USING
         if adv and bluetooth.resolve_adv_data(adv.data, Bluetooth.ADV_NAME_CMPL) == 'Kontakt':
             print(ubinascii.hexlify(adv.mac))
             MacAddressList.append(ubinascii.hexlify(adv.mac))
